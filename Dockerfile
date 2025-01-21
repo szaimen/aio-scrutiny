@@ -1,15 +1,6 @@
-FROM alpine:3.21.2
+FROM ghcr.io/analogj/scrutiny:v0.8.1-omnibus
 
-# hadolint ignore=DL3018
-RUN set -ex; \
-    apk add --no-cache fail2ban tzdata util-linux-misc bash nftables ip6tables; \
-    mv /etc/fail2ban/filter.d/common.conf /tmp/; \
-    rm -r /etc/fail2ban/jail.d/*; \
-    rm -r /etc/fail2ban/filter.d/*; \
-    mv /tmp/common.conf /etc/fail2ban/filter.d/
+ENV SCRUTINY_WEB_LISTEN_PORT=8000 \
+    COLLECTOR_API_ENDPOINT=http://127.0.0.1:8000
 
-COPY --chmod=775 start.sh /start.sh
-
-# hadolint ignore=DL3002
-USER root
-ENTRYPOINT [ "/start.sh" ]
+RUN sed -i 's/localhost:8080/127.0.0.1:8000/' /etc/services.d/collector-once/run
