@@ -7,7 +7,10 @@ while ! nc -z "nextcloud-aio-nextcloud" 9001; do
 done
 
 if [ -n "$(dig A +short nextcloud-aio-notifications)" ]; then
-    export SCRUTINY_NOTIFY_URLS=["script:///notify.sh"]
+    echo "Setting SCRUTINY_NOTIFY_URLS..."
+    export SCRUTINY_NOTIFY_URLS="script:///notify.sh"
 fi
+
+echo "Scrutiny started"
 
 exec "$@"
