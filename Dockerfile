@@ -1,4 +1,4 @@
-FROM ghcr.io/analogj/scrutiny:v0.8.1-omnibus
+FROM ghcr.io/analogj/scrutiny:v0.8.3-omnibus
 
 ENV SCRUTINY_WEB_LISTEN_PORT=8000 \
     COLLECTOR_API_ENDPOINT=http://127.0.0.1:8000
