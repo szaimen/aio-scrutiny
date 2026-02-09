@@ -3,7 +3,7 @@ FROM ghcr.io/analogj/scrutiny:v0.8.3-omnibus
 ENV SCRUTINY_WEB_LISTEN_PORT=8000 \
     COLLECTOR_API_ENDPOINT=http://127.0.0.1:8000
 
-RUN sed -i 's/localhost:8080/127.0.0.1:8000/' /etc/services.d/collector-once/run
+RUN ls -l /etc/services.d/ && sed -i 's/localhost:8080/127.0.0.1:8000/' /etc/services.d/collector-once/run
 
 COPY --chmod=775 start.sh /start.sh
 COPY --chmod=775 notify.sh /notify.sh
